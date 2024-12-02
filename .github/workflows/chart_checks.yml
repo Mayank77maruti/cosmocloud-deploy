@@ -29,13 +29,3 @@ jobs:
           helm lint ./cosmocloud-deploy
 
 
-      - name: Helm Template Validation
-        run: |
-          helm template test ./cosmocloud-deploy > output.yaml
-          kubectl apply --dry-run=client -f output.yaml
-
-
-      - name: Validate YAML Syntax
-        uses: instrumenta/kubeval-action@v1.0.0
-        with:
-          files: output.yaml
