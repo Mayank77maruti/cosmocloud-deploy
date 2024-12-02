@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Helm
+      uses: azure/setup-helm@v1
+
+    - name: Set up Kubernetes
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.21.0'
+
+    - name: Configure Kubernetes credentials
+      run: |
+        mkdir -p ~/.kube
+        echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+
+    - name: Install Helm chart
+      run: |
+        helm install testapp . --atomic --timeout 30s
+
+    - name: Test deployment
+      run: |
+        kubectl get pods
+        kubectl get services
+
+    - name: Uninstall Helm chart
+      if: always()
+      run: |
+        helm uninstall testapp
