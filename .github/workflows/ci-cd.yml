@@ -30,17 +30,18 @@ jobs:
       run: |
         mkdir -p ~/.kube
         echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+        chmod 600 ~/.kube/config  
 
     - name: Install Helm chart
       run: |
-        helm install ${{ secrets.HELM_RELEASE_NAME }} . --atomic --timeout 30s
+        helm install ${{ secrets.HELM_RELEASE_NAME }} ./cosmocloud-deploy --atomic --timeout 30s
 
     - name: Test deployment
       run: |
-        kubectl get pods
-        kubectl get services
+        kubectl get pods -n ${{ secrets.HELM_RELEASE_NAME }}-namespace
+        kubectl get services -n ${{ secrets.HELM_RELEASE_NAME }}-namespace
 
     - name: Uninstall Helm chart
       if: always()
       run: |
-        helm uninstall ${{ secrets.HELM_RELEASE_NAME }}
+        helm uninstall ${{ secrets.HELM_RELEASE_NAME }} --namespace ${{ secrets.HELM_RELEASE_NAME }}-namespace
