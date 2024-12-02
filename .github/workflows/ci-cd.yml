@@ -18,6 +18,8 @@ jobs:
 
     - name: Set up Helm
       uses: azure/setup-helm@v1
+      with:
+        version: 'v3.7.0'  
 
     - name: Set up Kubernetes
       uses: azure/setup-kubectl@v1
@@ -31,7 +33,7 @@ jobs:
 
     - name: Install Helm chart
       run: |
-        helm install testapp . --atomic --timeout 30s
+        helm install ${{ secrets.HELM_RELEASE_NAME }} . --atomic --timeout 30s
 
     - name: Test deployment
       run: |
@@ -41,4 +43,4 @@ jobs:
     - name: Uninstall Helm chart
       if: always()
       run: |
-        helm uninstall testapp
+        helm uninstall ${{ secrets.HELM_RELEASE_NAME }}
