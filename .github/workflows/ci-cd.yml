@@ -30,7 +30,42 @@ jobs:
       run: |
         mkdir -p ~/.kube
         echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
-        chmod 600 ~/.kube/config  
+        chmod 600 ~/.kube/config  # Set correct permissions
+
+    - name: Verify Kubernetes configuration
+      run: |
+        kubectl config view
+        kubectl cluster-info
+
+    - name: Set Kubernetes context
+      run: |
+        kubectl config use-context ${{ secrets.KUBE_CONTEXT }}
+
+    - name: Check Helm chart directory
+      run: |
+        if [ ! -d "./cosmocloud-deploy" ]; then
+          echo "Helm chart directory ./cosmocloud-deploy does not exist."
+          exit 1
+        fi
+
+    - name: Check Helm chart files
+      run: |
+        if [ ! -f "./cosmocloud-deploy/Chart.yaml" ]; then
+          echo "Chart.yaml file is missing in ./cosmocloud-deploy."
+          exit 1
+        fi
+        if [ ! -f "./cosmocloud-deploy/values.yaml" ]; then
+          echo "values.yaml file is missing in ./cosmocloud-deploy."
+          exit 1
+        fi
+        if [ ! -d "./cosmocloud-deploy/templates" ]; then
+          echo "templates directory is missing in ./cosmocloud-deploy."
+          exit 1
+        fi
+
+    - name: Validate Helm chart
+      run: |
+        helm lint ./cosmocloud-deploy
 
     - name: Install Helm chart
       run: |
