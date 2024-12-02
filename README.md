@@ -1,3 +1,3 @@
 # cosmocloud-deploy
 
-WORK IN PROGRESS
+WORK IN PROGRES
