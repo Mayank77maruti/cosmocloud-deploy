@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: default
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: {{ .Values.frontend.image }}
+        env:
+        - name: BACKEND_URL
+          value: {{ .Values.frontend.env.BACKEND_URL }}
+        ports:
+        - containerPort: {{ .Values.frontend.servicePort }}
