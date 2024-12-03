@@ -215,11 +215,8 @@ Each service in TestApp includes health checks to ensure that the application is
 
 ### CI/CD Integration
 
-TestApp is integrated with a CI/CD pipeline that automates the build, test, and deployment processes. This ensures that new changes are deployed quickly and reliably.
+TestApp is integrated with a CI/CD pipeline that automates the build, test processes. 
 
-### Resource Management
-
-The application includes resource requests and limits for each service, ensuring that Kubernetes allocates the appropriate amount of resources to each pod. This helps in optimizing resource usage and preventing resource contention.
 
 ---
 
