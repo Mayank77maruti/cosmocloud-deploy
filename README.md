@@ -109,7 +109,10 @@ To deploy TestApp with Helm, follow these steps:
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd <project-directory>
+   ```
+2. **CD Into the main directory**
+   ```bash
+   cd cosmocloud-deploy
    ```
 
 2. **Install the Helm chart**:
