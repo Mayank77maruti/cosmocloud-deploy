@@ -34,7 +34,7 @@ jobs:
     
     - name: Install Helm chart
       run: |
-        helm upgrade --install ${{ secrets.HELM_RELEASE_NAME }} ./cosmocloud-deploy --atomic --timeout 30s
+        helm install testapp . --atomic --timeout 30s
     
     - name: Test deployment
       run: |
