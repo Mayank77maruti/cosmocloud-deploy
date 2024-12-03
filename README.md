@@ -47,6 +47,27 @@ These services communicate through internal Kubernetes DNS:
 - The `frontend` communicates with the `backend` via `http://backend-svc:8000`.
 - The `backend` communicates with `redis` via `redis://redis-svc:6379`.
 
+Project Structure 
+
+```
+├── .github/workflows        # CI/CD workflows for GitHub Actions
+│   └── chart_checks.yaml          # GitHub Action for deployment
+├── cosmocloud-deploy        # Main deployment directory
+│   ├── templates            # Helm templates for Kubernetes resources
+│   │   ├── backend-deployment.yaml   # Backend deployment manifest
+│   │   ├── backend-service.yaml      # Backend service manifest
+│   │   ├── frontend-deployment.yaml  # Frontend deployment manifest
+│   │   ├── frontend-service.yaml     # Frontend service manifest
+│   │   ├── hpabackend.yaml           # HPA for the backend
+│   │   ├── hpafrontend.yaml          # HPA for the frontend
+│   │   ├── hparedis.yaml             # HPA for Redis
+│   │   ├── redis-deployment.yaml     # Redis deployment manifest
+│   │   └── redis-service.yaml        # Redis service manifest
+│   ├── Chart.yaml           # Helm chart metadata
+│   ├── values.yaml          # Default configuration values
+│   └── .helmignore          # Files to ignore during Helm packaging
+├── README.md                # Documentation
+```
 ---
 
 ## Prerequisites
