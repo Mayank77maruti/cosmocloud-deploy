@@ -19,7 +19,7 @@ jobs:
     - name: Set up Helm
       uses: azure/setup-helm@v1
       with:
-        version: 'v3.7.0'  # Ensure this is a version that supports --timeout
+        version: 'v3.7.0'  
     
     - name: Set up Kubernetes
       uses: azure/setup-kubectl@v1
@@ -34,7 +34,7 @@ jobs:
     
     - name: Install Helm chart
       run: |
-        helm upgrade --install testapp ./cosmocloud-deploy --atomic --timeout 30s
+        helm upgrade --install testapp ./cosmocloud-deploy --atomic 
     
     - name: Test deployment
       run: |
