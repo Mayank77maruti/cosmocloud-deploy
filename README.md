@@ -2,6 +2,10 @@
 
 TestApp is a full-stack web application consisting of a backend, frontend, and Redis service, designed to demonstrate scalability, deployment, and management in a Kubernetes environment. This application is deployed using Helm charts and includes rolling updates and Horizontal Pod Autoscaling (HPA) for high availability and efficiency.
 
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/DS-DESbmZQ4?si=Wj0QSrf_FDv6wDyu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 ---
 
 ## Table of Contents
@@ -16,8 +20,6 @@ TestApp is a full-stack web application consisting of a backend, frontend, and R
 - [Usage](#usage)
 - [Health Checks](#health-checks)
 - [CI/CD Pipeline](#cicd-pipeline)
-- [Troubleshooting](#troubleshooting)
-- [License](#license)
 
 ---
 
@@ -165,7 +167,7 @@ This project includes integration with a CI/CD pipeline that automates the deplo
 
 ### CI/CD Tools Used:
 - **GitHub Actions** (or any other CI/CD tool)
-- **Docker Hub** (or any other container registry)
+
 
 ---
 
@@ -195,9 +197,6 @@ This project includes integration with a CI/CD pipeline that automates the deplo
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -225,22 +224,3 @@ The application includes resource requests and limits for each service, ensuring
 
 ---
 
-## Additional Tips
-
-### Monitoring and Logging
-
-For better observability, consider integrating monitoring and logging tools like Prometheus and Grafana for metrics and ELK stack (Elasticsearch, Logstash, Kibana) for logs.
-
-### Security
-
-Ensure that your Kubernetes cluster and Helm charts are secure. Use role-based access control (RBAC) and secure your container images by scanning them for vulnerabilities.
-
-### Backup and Recovery
-
-Implement backup and recovery strategies for your Redis data and other critical components. This ensures that you can recover quickly in case of data loss or system failures.
-
----
-
-Feel free to reach out if you have any questions or need further assistance with deploying and managing TestApp.
-
-Happy coding! 🚀
