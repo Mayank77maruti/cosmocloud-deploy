@@ -23,7 +23,7 @@ TestApp is a full-stack web application consisting of a backend, frontend, and R
 
 ## Overview
 
-TestApp is designed to simulate a microservices architecture with the following components:
+TestApp is designed to simulate a microservices architecture with the following components:-
 
 - **Frontend**: A user interface interacting with the backend.
 - **Backend**: A service that processes requests and communicates with Redis for caching.
