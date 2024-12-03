@@ -2,9 +2,8 @@
 
 TestApp is a full-stack web application consisting of a backend, frontend, and Redis service, designed to demonstrate scalability, deployment, and management in a Kubernetes environment. This application is deployed using Helm charts and includes rolling updates and Horizontal Pod Autoscaling (HPA) for high availability and efficiency.
 
-<div align="center">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/DS-DESbmZQ4?si=Wj0QSrf_FDv6wDyu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
+# Video to see the commands run in live
+https://www.youtube.com/watch?v=DS-DESbmZQ4
 
 ---
 
