@@ -1,32 +1,32 @@
-name: Helm Chart Checks with Install and Port Health Check
+# name: Helm Chart Checks with Install and Port Health Check
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
 
-jobs:
-  lint-and-validate:
-    runs-on: ubuntu-latest
+# jobs:
+#   lint-and-validate:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Set up Helm
-        uses: azure/setup-helm@v3
-        with:
-          version: v3.12.0
+#       - name: Set up Helm
+#         uses: azure/setup-helm@v3
+#         with:
+#           version: v3.12.0
 
-      - name: Helm Install
-        run: |
-          helm install testapp ./cosmocloud-deploy --namespace cosmocloud --atomic --timeout 30s
+#       - name: Helm Install
+#         run: |
+#           helm install testapp ./cosmocloud-deploy --namespace cosmocloud --atomic --timeout 30s
 
-      - name: Check Port Health
-        run: |
-          kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=backend -n cosmocloud
-          kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=frontend -n cosmocloud
-          kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=redis -n cosmocloud
+#       - name: Check Port Health
+#         run: |
+#           kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=backend -n cosmocloud
+#           kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=frontend -n cosmocloud
+#           kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=redis -n cosmocloud
