@@ -24,4 +24,5 @@ jobs:
 
       - name: Helm Lint
         run: |
-          helm lint ./cosmocloud-deploy 
+          cd .. 
+          helm lint ./cosmocloud-deploy
