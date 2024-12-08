@@ -50,23 +50,30 @@ These services communicate through internal Kubernetes DNS:
 Project Structure 
 
 ```
-├── .github/workflows        # CI/CD workflows for GitHub Actions
-│   └── chart_checks.yaml          # GitHub Action for deployment
-├── cosmocloud-deploy        # Main deployment directory
-│   ├── templates            # Helm templates for Kubernetes resources
-│   │   ├── backend-deployment.yaml   # Backend deployment manifest
-│   │   ├── backend-service.yaml      # Backend service manifest
-│   │   ├── frontend-deployment.yaml  # Frontend deployment manifest
-│   │   ├── frontend-service.yaml     # Frontend service manifest
-│   │   ├── hpabackend.yaml           # HPA for the backend
-│   │   ├── hpafrontend.yaml          # HPA for the frontend
-│   │   ├── hparedis.yaml             # HPA for Redis
-│   │   ├── redis-deployment.yaml     # Redis deployment manifest
-│   │   └── redis-service.yaml        # Redis service manifest
-│   ├── Chart.yaml           # Helm chart metadata
-│   ├── values.yaml          # Default configuration values
-│   └── .helmignore          # Files to ignore during Helm packaging
-├── README.md                # Documentation
+cosmocloud-deploy/
+│
+├── .github/                     # GitHub Actions workflows directory
+│   └── workflows/               # Directory for GitHub workflow files
+│       └── chart_checks.yaml    # GitHub Action file for deployment and testing
+│
+├── templates/                   # Directory for Kubernetes manifest YAML files
+│   ├── backend-deployment.yaml  # Deployment manifest for the backend service
+│   ├── backend-service.yaml     # Service manifest for the backend service
+│   ├── frontend-deployment.yaml # Deployment manifest for the frontend service
+│   ├── frontend-service.yaml    # Service manifest for the frontend service
+│   ├── hpabackend.yaml          # HorizontalPodAutoscaler for the backend
+│   ├── hpafrontend.yaml         # HorizontalPodAutoscaler for the frontend
+│   ├── hparedis.yaml            # HorizontalPodAutoscaler for Redis
+│   ├── redis-deployment.yaml    # Deployment manifest for the Redis service
+│   └── redis-service.yaml       # Service manifest for the Redis service
+│
+├── Chart.yaml                   # Helm chart metadata
+│   └── metadata about the Helm chart like name, version, and dependencies
+│
+├── values.yaml                  # Default configuration values for the Helm chart
+│
+└── .helmignore                  # List of files to ignore when packaging the Helm chart
+
 ```
 ---
 
@@ -110,14 +117,10 @@ To deploy TestApp with Helm, follow these steps:
    ```bash
    git clone <repository-url>
    ```
-2. **CD Into the main directory**
-   ```bash
-   cd cosmocloud-deploy
-   ```
 
 2. **Install the Helm chart**:
    ```bash
-   helm install testapp . --atomic --timeout 30s
+   helm install testapp cosmocloud-deploy --atomic --timeout 30s
    ```
 
 This will deploy all the services in your Kubernetes cluster, including the frontend, backend, and Redis components.
