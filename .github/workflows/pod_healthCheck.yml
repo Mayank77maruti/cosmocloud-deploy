@@ -23,7 +23,6 @@ jobs:
 
       - name: Helm Install
         run: |
-          cd ..
           helm install testapp ./cosmocloud-deploy --namespace cosmocloud --atomic --timeout 30s
 
       - name: Check Port Health
