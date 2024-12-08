@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          path: cosmocloud-deploy  # Set the checkout path explicitly
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
@@ -23,11 +25,11 @@ jobs:
 
       - name: Helm Lint
         run: |
-          helm lint cosmocloud-deploy --set kubeconfig=/path/to/kubeconfig.yaml
+          helm lint . --set kubeconfig=/path/to/kubeconfig.yaml  # Lint directly from the `cosmocloud-deploy` folder
           
       - name: Helm Template
         run: |
-          helm template cosmocloud-deploy > template-output.yaml
+          helm template . > template-output.yaml  # Use the current directory (cosmocloud-deploy)
 
       - name: Apply Templates
         run: |
