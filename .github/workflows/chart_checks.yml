@@ -23,11 +23,11 @@ jobs:
 
       - name: Helm Lint
         run: |
-          helm lint ./cosmocloud-deploy --set kubeconfig=/path/to/kubeconfig.yaml
+          helm lint cosmocloud-deploy --set kubeconfig=/path/to/kubeconfig.yaml
           
       - name: Helm Template
         run: |
-          helm template ./cosmocloud-deploy > template-output.yaml
+          helm template cosmocloud-deploy > template-output.yaml
 
       - name: Apply Templates
         run: |
