@@ -2,6 +2,9 @@
 
 TestApp is a full-stack web application consisting of a backend, frontend, and Redis service, designed to demonstrate scalability, deployment, and management in a Kubernetes environment. This application is deployed using Helm charts and includes rolling updates and Horizontal Pod Autoscaling (HPA) for high availability and efficiency.
 
+# Video to see the commands run in live
+https://www.youtube.com/watch?v=DS-DESbmZQ4
+
 ---
 
 ## Table of Contents
@@ -16,8 +19,6 @@ TestApp is a full-stack web application consisting of a backend, frontend, and R
 - [Usage](#usage)
 - [Health Checks](#health-checks)
 - [CI/CD Pipeline](#cicd-pipeline)
-- [Troubleshooting](#troubleshooting)
-- [License](#license)
 
 ---
 
@@ -46,6 +47,27 @@ These services communicate through internal Kubernetes DNS:
 - The `frontend` communicates with the `backend` via `http://backend-svc:8000`.
 - The `backend` communicates with `redis` via `redis://redis-svc:6379`.
 
+Project Structure 
+
+```
+├── .github/workflows        # CI/CD workflows for GitHub Actions
+│   └── chart_checks.yaml          # GitHub Action for deployment
+├── cosmocloud-deploy        # Main deployment directory
+│   ├── templates            # Helm templates for Kubernetes resources
+│   │   ├── backend-deployment.yaml   # Backend deployment manifest
+│   │   ├── backend-service.yaml      # Backend service manifest
+│   │   ├── frontend-deployment.yaml  # Frontend deployment manifest
+│   │   ├── frontend-service.yaml     # Frontend service manifest
+│   │   ├── hpabackend.yaml           # HPA for the backend
+│   │   ├── hpafrontend.yaml          # HPA for the frontend
+│   │   ├── hparedis.yaml             # HPA for Redis
+│   │   ├── redis-deployment.yaml     # Redis deployment manifest
+│   │   └── redis-service.yaml        # Redis service manifest
+│   ├── Chart.yaml           # Helm chart metadata
+│   ├── values.yaml          # Default configuration values
+│   └── .helmignore          # Files to ignore during Helm packaging
+├── README.md                # Documentation
+```
 ---
 
 ## Prerequisites
@@ -87,7 +109,10 @@ To deploy TestApp with Helm, follow these steps:
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd <project-directory>
+   ```
+2. **CD Into the main directory**
+   ```bash
+   cd cosmocloud-deploy
    ```
 
 2. **Install the Helm chart**:
@@ -165,7 +190,7 @@ This project includes integration with a CI/CD pipeline that automates the deplo
 
 ### CI/CD Tools Used:
 - **GitHub Actions** (or any other CI/CD tool)
-- **Docker Hub** (or any other container registry)
+
 
 ---
 
@@ -195,9 +220,6 @@ This project includes integration with a CI/CD pipeline that automates the deplo
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -217,30 +239,8 @@ Each service in TestApp includes health checks to ensure that the application is
 
 ### CI/CD Integration
 
-TestApp is integrated with a CI/CD pipeline that automates the build, test, and deployment processes. This ensures that new changes are deployed quickly and reliably.
+TestApp is integrated with a CI/CD pipeline that automates the build, test processes. 
 
-### Resource Management
-
-The application includes resource requests and limits for each service, ensuring that Kubernetes allocates the appropriate amount of resources to each pod. This helps in optimizing resource usage and preventing resource contention.
 
 ---
 
-## Additional Tips
-
-### Monitoring and Logging
-
-For better observability, consider integrating monitoring and logging tools like Prometheus and Grafana for metrics and ELK stack (Elasticsearch, Logstash, Kibana) for logs.
-
-### Security
-
-Ensure that your Kubernetes cluster and Helm charts are secure. Use role-based access control (RBAC) and secure your container images by scanning them for vulnerabilities.
-
-### Backup and Recovery
-
-Implement backup and recovery strategies for your Redis data and other critical components. This ensures that you can recover quickly in case of data loss or system failures.
-
----
-
-Feel free to reach out if you have any questions or need further assistance with deploying and managing TestApp.
-
-Happy coding! 🚀
