@@ -1,4 +1,4 @@
-name: Helm Chart Checks
+name: Helm Chart Checks with Install and Port Health Check
 
 on:
   push:
@@ -13,16 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
         with:
-          version: v3.12.0 
+          version: v3.12.0
 
-      - name: Helm Lint
+      - name: Helm Install
         run: |
-          cd .. 
-          helm lint ./cosmocloud-deploy
+          cd ..
+          helm install testapp cosmocloud-deploy --atomic --timeout 30s
+
+      - name: Use Kubernetes Config from Secrets
+        env:
+          KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
+        run: |
+          kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=backend -n cosmocloud
+          kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=frontend -n cosmocloud
+          kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=redis -n cosmocloud
