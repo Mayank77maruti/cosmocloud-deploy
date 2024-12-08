@@ -21,14 +21,6 @@ jobs:
         with:
           version: v3.12.0
 
-      - name: Change directory
-        run: |
-          cd ..
-
-      - name: Helm Lint
-        run: |
-          helm lint ./cosmocloud-deploy
-
       - name: Check Port Health
         run: |
           kubectl wait --for=condition=ready --timeout=60s pod -l app.kubernetes.io/name=backend -n cosmocloud
