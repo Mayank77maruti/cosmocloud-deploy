@@ -1,6 +1,6 @@
-# TestApp
+# cosmocloud-deploy
 
-TestApp is a full-stack web application consisting of a backend, frontend, and Redis service, designed to demonstrate scalability, deployment, and management in a Kubernetes environment. This application is deployed using Helm charts and includes rolling updates and Horizontal Pod Autoscaling (HPA) for high availability and efficiency.
+cosmocloud-deploy is a full-stack web application consisting of a backend, frontend, and Redis service, designed to demonstrate scalability, deployment, and management in a Kubernetes environment. This application is deployed using Helm charts and includes rolling updates and Horizontal Pod Autoscaling (HPA) for high availability and efficiency.
 
 # Video to see the commands run in live
 https://www.youtube.com/watch?v=DS-DESbmZQ4
